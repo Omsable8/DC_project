@@ -1,7 +1,7 @@
 # Distributed Computing Project
 
 ## Overview
-This project is a distributed system designed for handling authentication, user sign-up, and result processing using multiple microservices. It utilizes NGINX for load balancing, Apache Kafka for event handling, and Docker to containerize the services.
+This project is a distributed system designed for the popular JEE/NEET exams, whose wesbite during result declaration cannot handle multiple students' requests leading to downtime of the server.This handles authentication, user sign-up, and result processing using multiple microservices. It utilizes NGINX for load balancing, Apache Kafka for event handling, and Docker to containerize the services and couchdb to store all the students data.
 
 ## Features
 - **Authentication Service**: Handles user login.
@@ -11,12 +11,14 @@ This project is a distributed system designed for handling authentication, user 
 - **Kafka Event Handling**: Ensures smooth communication between services.
 - **Docker Deployment**: Runs all services in isolated containers.
 
+
 ## Prerequisites
 Ensure you have the following installed before proceeding:
 - Docker & Docker Compose
 - Python 3
 - Apache Kafka
 - NGINX
+- CouchDB
 
 ## Setup Instructions
 
