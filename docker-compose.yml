@@ -1,0 +1,108 @@
+version: '3.8'
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: wurstmeister/kafka
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka:9092"
+      KAFKA_LISTENERS: "PLAINTEXT://0.0.0.0:9092"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    depends_on:
+      - zookeeper
+
+  couchdb:
+    image: couchdb:latest
+    container_name: couchdb
+    ports:
+      - "5984:5984"
+    environment:
+      COUCHDB_USER: admin
+      COUCHDB_PASSWORD: password
+    volumes:
+      - couchdb_data:/opt/couchdb/data
+    restart: always
+
+
+
+  
+  auth_service:
+    container_name: auth
+    build:
+      context: .
+      args:
+        SERVICE: auth_service
+    ports:
+      - "5000:5000"
+    depends_on:
+      - couchdb
+
+  signup_service:
+    container_name: signup
+    build:
+      context: .
+      args:
+        SERVICE: student_service
+    ports:
+      - "5001:5001"
+    depends_on:
+      - couchdb
+
+  result_service_1:
+
+    container_name: result1
+    build:
+      context: .
+      args:
+        SERVICE: result_service
+    ports:
+      - "5002:5002"
+    depends_on:
+      - couchdb
+
+  result_service_2:
+    container_name: result2
+    build:
+      context: .
+      args:
+        SERVICE: result_service
+    ports:
+      - "5003:5002"
+    depends_on:
+      - couchdb
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    restart: always
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - auth_service
+      - signup_service
+      - result_service_1
+      - result_service_2
+
+
+  locust:
+    image: locustio/locust
+    container_name: locust
+    volumes:
+      - ./locustfile.py:/mnt/locust/locustfile.py
+    command: -f /mnt/locust/locustfile.py --host=http://nginx:8080
+    ports:
+      - "8089:8089"
+
+
+volumes:
+  couchdb_data:

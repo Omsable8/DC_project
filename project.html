@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JEE/NEET Exam Portal</title>
+    <link rel="stylesheet" href="style.css"></link>
+</head>
+<body>
+    <script src="script.js" defer></script>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <div class="logo-img">JN</div>
+            <div class="logo-text">JEE/NEET Portal</div>
+        </div>
+        <div class="user-info">
+            <div class="user-avatar">U</div>
+            <span class="username">Username</span>
+            <button class="logout-btn" id="logout">Logout</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Authentication Section -->
+        <div class="auth-container" id="auth-container">
+            <div class="auth-tabs">
+                <div class="auth-tab active" id="login-tab">Login</div>
+                <div class="auth-tab" id="signup-tab">Sign Up</div>
+            </div>
+            <div class="auth-form" id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" placeholder="Enter your password">
+                </div>
+                <button class="auth-btn" id="login-btn">Login</button>
+            </div>
+            <div class="auth-form" id="signup-form" style="display: none;">
+                <div class="form-group">
+                    <label for="signup-name">Full Name</label>
+                    <input type="text" id="signup-name" placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" placeholder="Create a password">
+                </div>
+                <div class="form-group">
+                    <label for="signup-confirm">Confirm Password</label>
+                    <input type="password" id="signup-confirm" placeholder="Confirm your password">
+                </div>
+                <button class="auth-btn" id="signup-btn">Sign Up</button>
+            </div>
+        </div>
+
+        <!-- Dashboard Section (initially hidden) -->
+        <div class="dashboard" id="dashboard">
+            <div class="dashboard-header">
+                <h1>Welcome to Your Exam Dashboard</h1>
+                <p>Track your progress, access study materials, and check your results</p>
+            </div>
+
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-value">85%</div>
+                    <div class="stat-label">Overall Score</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">12</div>
+                    <div class="stat-label">Tests Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">45h</div>
+                    <div class="stat-label">Study Time</div>
+                </div>
+            </div>
+
+            <div class="dashboard-sections">
+                <div class="section-card">
+                    <div class="section-image">
+                        <div class="subject-icon">P</div>
+                    </div>
+                    <div class="section-content">
+                        <h3>Physics</h3>
+                        <p>Master concepts like mechanics, thermodynamics, and electromagnetism with our comprehensive study materials and practice tests.</p>
+                    </div>
+                </div>
+                <div class="section-card">
+                    <div class="section-image">
+                        <div class="subject-icon">C</div>
+                    </div>
+                    <div class="section-content">
+                        <h3>Chemistry</h3>
+                        <p>From organic chemistry to chemical bonding, our expert-designed modules help you prepare effectively for your examinations.</p>
+                    </div>
+                </div>
+                <div class="section-card">
+                    <div class="section-image">
+                        <div class="subject-icon">M</div>
+                    </div>
+                    <div class="section-content">
+                        <h3>Mathematics</h3>
+                        <p>Strengthen your mathematical foundation with our comprehensive curriculum covering algebra, calculus, and coordinate geometry.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="get-results-container">
+                <button class="get-results-btn" id="results-btn">Get Results</button>
+            </div>
+
+            <div class="loader" id="loader"></div>
+        </div>
+    </main>
+
+    
+    <!-- Results Modal (Updated to Display Dynamic Data) -->
+    <div class="modal" id="results-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Your Exam Results</h2>
+                <button class="modal-close" id="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Subject-wise Performance:</strong></p>
+                <ul id="results-list">
+                    <!-- Dynamic results will be inserted here -->
+                </ul>
+                <p><strong>Overall Percentile:</strong> <span id="percentile"></span></p>
+                <p><strong>All India Rank:</strong> <span id="rank"></span></p>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 JEE/NEET Exam Portal | Powered by Microservice Architecture</p>
+    </footer>
+
+</body>
+</html>
