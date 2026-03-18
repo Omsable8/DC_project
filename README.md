@@ -82,6 +82,7 @@ Ensure you have the following installed before proceeding:
 
 ## Contributors
 - Om Sable
+- Divyanshi Kasaundhan
 
 ## License
 This project is licensed under MIT License.
